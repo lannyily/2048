@@ -4,6 +4,8 @@ O jogo **2048** é um jogo de quebra-cabeça numérico no qual o objetivo é com
 
 Desenvolvi essa aplicação do jogo **2048** usando **JavaScript**, **CSS** e **HTML**, recriando a mecânica original e permitindo que os jogadores se desafiem nesse clássico jogo de lógica e estratégia. 🚀
 
-![Imagem do WhatsApp de 2025-02-27 à(s) 14 44 51_6e02a811](https://github.com/user-attachments/assets/e3243772-8b55-4c7a-9ad2-0b40ce606547)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e3243772-8b55-4c7a-9ad2-0b40ce606547" alt="Imagem do jogo 2048">
+</p>
 
 Vídeo de Referência: https://youtu.be/RC_SglXG4Y8?si=BjPbm9csnlQoy5rH
