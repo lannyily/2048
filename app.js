@@ -116,41 +116,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function combineRow() {
         for (let i = 0; i < 15; i++) {
-            if (squares[i].innerHTML === squares[i+1].innerHTML) {
-                let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+1].innerHTML)
-                squares[i].innerHTML = combinedTotal
-                squares[i+1].innerHTML = 0
-                score += combinedTotal
-                scoreDisplay.innerHTML = score
-
-                if (combinedTotal !== 0) {
-                    squares[i].classList.add("combine-animation")
+            if (squares[i].innerHTML === squares[i + 1].innerHTML && squares[i].innerHTML != 0) {
+                let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i + 1].innerHTML);
     
-                    setTimeout(() => squares[i].classList.remove("combine-animation"), 200)
+                // Marca o novo bloco 2048 para ser reconhecido na vitória
+                if (combinedTotal === 2048) {
+                    squares[i].classList.add("new-2048");
                 }
+    
+                squares[i].innerHTML = combinedTotal;
+                squares[i + 1].innerHTML = 0;
+                score += combinedTotal;
+                scoreDisplay.innerHTML = score;
             }
         }
-        checkForWin()
+        checkForWin(); // Verifica a vitória logo após combinar
     }
     
     function combineColumn() {
         for (let i = 0; i < 12; i++) {
-            if (squares[i].innerHTML === squares[i+width].innerHTML) {
-                let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+width].innerHTML)
-                squares[i].innerHTML = combinedTotal
-                squares[i+width].innerHTML = 0
-                score += combinedTotal
-                scoreDisplay.innerHTML = score
-
-                if (combinedTotal !== 0) {
-                    squares[i].classList.add("combine-animation")
+            if (squares[i].innerHTML === squares[i + width].innerHTML && squares[i].innerHTML != 0) {
+                let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i + width].innerHTML);
     
-                    setTimeout(() => squares[i].classList.remove("combine-animation"), 200)
+                // Marca o novo bloco 2048 para ser reconhecido na vitória
+                if (combinedTotal === 2048) {
+                    squares[i].classList.add("new-2048");
                 }
+    
+                squares[i].innerHTML = combinedTotal;
+                squares[i + width].innerHTML = 0;
+                score += combinedTotal;
+                scoreDisplay.innerHTML = score;
             }
         }
-        checkForWin()
-    }
+        checkForWin(); // Verifica a vitória logo após combinar
+    }    
 
     // atribuir funções às teclas
     function control(e){
@@ -195,15 +195,16 @@ document.addEventListener('DOMContentLoaded', () => {
         generate()
     }
 
-    //verifica o número 2048 nos quadrados para ganhar
     function checkForWin() {
         for (let i = 0; i < squares.length; i++) {
-            if (squares[i].innerHTML == 2048) {
-                resultDisplay.innerHTML = 'Você GANHOU!';
+            // Verifica se um bloco 2048 foi criado pela fusão de dois 1024
+            if (squares[i].innerHTML == 2048 && squares[i].classList.contains("new-2048")) {
+                setTimeout(() => {
+                    alert("Você GANHOU! Parabéns!");
+                    restartGame();
+                }, 100);
                 document.removeEventListener('keydown', control);
-    
-                alert("Parabéns, você ganhou! Tente novamente.");
-                restartGame();
+                return;
             }
         }
     }    
@@ -232,27 +233,42 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDisplay.innerHTML = 'Você PERDEU!';
         document.removeEventListener('keydown', control);
     
-        alert("Você perdeu! Tente novamente.");
+        alert("Você perdeu! Tente novamente :)");
         restartGame();
     }    
 
-    //adicionar cores
     function addColours() {
         for (let i = 0; i < squares.length; i++) {
-            if (squares[i].innerHTML == 0) squares[i].style.backgroundColor = '#796e62'
-            else if (squares[i].innerHTML == 2) squares[i].style.backgroundColor = '#eee4da'
-            else if (squares[i].innerHTML == 4) squares[i].style.backgroundColor = '#ede0c8'
-            else if (squares[i].innerHTML == 8) squares[i].style.backgroundColor = '#f2b179'
-            else if (squares[i].innerHTML == 16) squares[i].style.backgroundColor = '#ffcea4'
-            else if (squares[i].innerHTML == 32) squares[i].style.backgroundColor = '#e8c064'
-            else if (squares[i].innerHTML == 64) squares[i].style.backgroundColor = '#ffab6e'
-            else if (squares[i].innerHTML == 128) squares[i].style.backgroundColor = '#fd9982'
-            else if (squares[i].innerHTML == 256) squares[i].style.backgroundColor = '#ead79c'
-            else if (squares[i].innerHTML == 512) squares[i].style.backgroundColor = '#76daff'
-            else if (squares[i].innerHTML == 1024) squares[i].style.backgroundColor = '#beeaa5'
-            else if (squares[i].innerHTML == 2048) squares[i].style.backgroundColor = '#d7d4f0'
+            let value = squares[i].innerHTML;
+            
+            // Define o tamanho da fonte com base no número de algarismos
+            if (value.length === 1) {
+                squares[i].style.fontSize = "60px";
+            } else if (value.length === 2) {
+                squares[i].style.fontSize = "60px";
+            } else if (value.length === 3) {
+                squares[i].style.fontSize = "50px";
+            } else {
+                squares[i].style.fontSize = "45px"; // Para números com 4 algarismos
+            }
+    
+            // Adiciona cores ao fundo dos blocos
+            if (value == 0) squares[i].style.backgroundColor = '#796e62';
+            else if (value == 2) squares[i].style.backgroundColor = '#eee4da';
+            else if (value == 4) squares[i].style.backgroundColor = '#ede0c8';
+            else if (value == 8) squares[i].style.backgroundColor = '#f2b179';
+            else if (value == 16) squares[i].style.backgroundColor = '#ffcea4';
+            else if (value == 32) squares[i].style.backgroundColor = '#e8c064';
+            else if (value == 64) squares[i].style.backgroundColor = '#ffab6e';
+            else if (value == 128) squares[i].style.backgroundColor = '#fd9982';
+            else if (value == 256) squares[i].style.backgroundColor = '#ead79c';
+            else if (value == 512) squares[i].style.backgroundColor = '#76daff';
+            else if (value == 1024) squares[i].style.backgroundColor = '#beeaa5';
+            else if (value == 2048) squares[i].style.backgroundColor = '#d7d4f0';
         }
     }
+    
+
     addColours()
 
     let myTimer = setInterval(addColours, 50)
