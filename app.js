@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let squares = []
     let score = 0
 
-    // crie o tabuleiro de jogo
+    
     function createBoard(){
         for (let i = 0; i < width * width; i++){
             const square = document.createElement('div')
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     createBoard()
 
-    // gerar novo numero
+    
     function generate(){
         const randomNumber = Math.floor(Math.random() * squares.length)
         console.log(randomNumber)
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (squares[i].innerHTML === squares[i + 1].innerHTML && squares[i].innerHTML != 0) {
                 let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i + 1].innerHTML);
     
-                // Marca o novo bloco 2048 para ser reconhecido na vitória
+                
                 if (combinedTotal === 2048) {
                     squares[i].classList.add("new-2048");
                 }
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 scoreDisplay.innerHTML = score;
             }
         }
-        checkForWin(); // Verifica a vitória logo após combinar
+        checkForWin(); 
     }
     
     function combineColumn() {
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (squares[i].innerHTML === squares[i + width].innerHTML && squares[i].innerHTML != 0) {
                 let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i + width].innerHTML);
     
-                // Marca o novo bloco 2048 para ser reconhecido na vitória
+                
                 if (combinedTotal === 2048) {
                     squares[i].classList.add("new-2048");
                 }
@@ -149,10 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 scoreDisplay.innerHTML = score;
             }
         }
-        checkForWin(); // Verifica a vitória logo após combinar
+        checkForWin(); 
     }    
 
-    // atribuir funções às teclas
     function control(e){
         if (e.key === 'ArrowLeft') {
             keyLeft()
@@ -195,9 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
         generate()
     }
 
+
     function checkForWin() {
         for (let i = 0; i < squares.length; i++) {
-            // Verifica se um bloco 2048 foi criado pela fusão de dois 1024
             if (squares[i].innerHTML == 2048 && squares[i].classList.contains("new-2048")) {
                 setTimeout(() => {
                     alert("Você GANHOU! Parabéns!");
@@ -241,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < squares.length; i++) {
             let value = squares[i].innerHTML;
             
-            // Define o tamanho da fonte com base no número de algarismos
+            
             if (value.length === 1) {
                 squares[i].style.fontSize = "60px";
             } else if (value.length === 2) {
@@ -249,10 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (value.length === 3) {
                 squares[i].style.fontSize = "50px";
             } else {
-                squares[i].style.fontSize = "45px"; // Para números com 4 algarismos
+                squares[i].style.fontSize = "45px"; 
             }
     
-            // Adiciona cores ao fundo dos blocos
+            
             if (value == 0) squares[i].style.backgroundColor = '#796e62';
             else if (value == 2) squares[i].style.backgroundColor = '#eee4da';
             else if (value == 4) squares[i].style.backgroundColor = '#ede0c8';
