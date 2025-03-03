@@ -8,4 +8,4 @@ Desenvolvi essa aplicação do jogo **2048** usando **JavaScript**, **CSS** e **
   <img src="https://github.com/user-attachments/assets/e3243772-8b55-4c7a-9ad2-0b40ce606547" alt="Imagem do jogo 2048" width="300">
 </p>
 
-Vídeo de Referência: https://youtu.be/RC_SglXG4Y8?si=BjPbm9csnlQoy5rH
+
